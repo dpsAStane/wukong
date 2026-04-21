@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wukong's Trial — Combat Tic Tac Toe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- AMBIENT LAYER -->
+<div id="ambient-layer"></div>
+
+<!-- ════════════════════════════════════════
+     MAIN MENU
+════════════════════════════════════════ -->
+<section id="screen-menu" class="screen active">
+  <div class="logo-wrap">
+    <span class="logo-kanji">齊 天 大 聖 傳</span>
+    <span class="logo-main">Wukong's Trial</span>
+    <div class="divider" style="width:300px;margin-top:10px"></div>
+    <span class="logo-sub">Combat · Strategy · Destiny</span>
+  </div>
+  <nav class="menu-nav">
+    <button class="menu-btn" onclick="showScreen('screen-mode')">
+     Play
+    </button>
+    <button class="menu-btn" onclick="openSettings()">
+      Cultivation Chamber
+    </button>
+    <button class="menu-btn" onclick="openHistory()">
+      Battle Chronicle
+    </button>
+    <button class="menu-btn" onclick="showScreen('screen-about')">
+      Sacred Lore
+    </button>
+  </nav>
+  <p class="menu-footer">Inspired by Black Myth: Wukong · A Tribute to the Great Sage</p>
+</section>
+
+<!-- ════════════════════════════════════════
+     MODE SELECT
+════════════════════════════════════════ -->
+<section id="screen-mode" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-menu')">◂ Return</button>
+  <div class="section-header">
+    <h2>Choose Your Battle</h2>
+    <div class="divider"></div>
+    <p style="font-family:var(--font-body);color:var(--paper-d); letter-spacing: 2px;font-size:15px;margin-top:8px">Two paths to glory await you, great warrior.</p>
+  </div>
+  <div class="card-row">
+    <div class="mode-card" onclick="startPvP()">
+      <span class="card-icon"><img class="img" src="assets/icons/pvp.png" alt="Two Sages"></span>
+      <div class="card-title">Two Sages</div>
+      <p class="card-desc">Face a fellow warrior in glorious local combat. Two players, one board, infinite rivalry.</p>
+    </div>
+    <div class="mode-card" onclick="showScreen('screen-diff')">
+      <span class="card-icon"><img class="img" src="assets/icons/pvai.png" alt="Vs. The Heavens"></span>
+      <div class="card-title">Vs. The Heavens</div>
+      <p class="card-desc">Challenge a celestial adversary. Test your wisdom against the divine opposition of Artificial Intelligence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     DIFFICULTY SELECT
+════════════════════════════════════════ -->
+<section id="screen-diff" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-mode')">◂ Return</button>
+  <div class="section-header">
+    <h2>Choose Your Foe</h2>
+    <div class="divider"></div>
+    <p style="font-family:var(--font-body);color:var(--paper-d);font-size:15px;margin-top:8px">Who do you dare to challenge, great warrior?</p>
+  </div>
+  <div class="card-row">
+    <div class="diff-card" onclick="startPvAI('easy')">
+      <img class="diff-icon" src="assets/images/macaque.jpg" alt="macaque">
+      <div class="diff-name">Macaque</div>
+      <div class="diff-level">Easy</div>
+      <p class="diff-desc">“Chaos is his only strategy. Victory is yours to take.”</p>
+    </div>
+    <div class="diff-card" onclick="startPvAI('medium')">
+      <img class="diff-icon" src="assets/images/king.jpg" alt="yaoguai">
+      <div class="diff-name">Yaoguai King</div>
+      <div class="diff-level">Medium</div>
+      <p class="diff-desc">“He attacks with cunning but falters under pressure.”</p>
+    </div>
+    <div class="diff-card" onclick="startPvAI('hard')">
+      <img class="diff-icon" src="assets/images/shen.jpg" alt="shen">
+      <div class="diff-name">Erlang Shen</div>
+      <div class="diff-level">Unbeatable</div>
+      <p class="diff-desc">“The True Lord sees every possible future. Can fate itself be defied?”</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SETTINGS
+════════════════════════════════════════ -->
+<section id="screen-settings" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-menu')">◂ Return</button>
+  <div class="section-header">
+    <h2>Cultivation Chamber</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="settings-wrap">
+
+    <div class="settings-block">
+      <h3>⚔ Player 1 — Choose Your Sage</h3>
+      <div class="av-grid" id="av1-grid"></div>
+    </div>
+
+    <div class="settings-block">
+      <h3>✿ Player 2 — Choose Your Sage</h3>
+      <div class="av-grid" id="av2-grid"></div>
+    </div>
+
+    <div class="settings-block">
+      <h3>🌄 Realm — Choose Your Battlefield</h3>
+      <div class="theme-grid" id="theme-grid"></div>
+    </div>
+
+    <div class="settings-block">
+      <h3>🔊 Elemental Sounds</h3>
+      <div class="sound-controls">
+        <div class="sound-row">
+          <label>Master Volume</label>
+          <input type="range" id="vol-master" min="0" max="100" value="70"
+                 oninput="setVol('master',this.value)">
+          <span class="vol-display" id="disp-master">70</span>
+        </div>
+        <div class="sound-row">
+          <label>Battle SFX</label>
+          <input type="range" id="vol-sfx" min="0" max="100" value="80"
+                 oninput="setVol('sfx',this.value)">
+          <span class="vol-display" id="disp-sfx">80</span>
+        </div>
+        <div class="sound-row">
+          <label>Ancient Music</label>
+          <input type="range" id="vol-music" min="0" max="100" value="40"
+                 oninput="setVol('music',this.value)">
+          <span class="vol-display" id="disp-music">40</span>
+        </div>
+        <div class="toggle-row">
+          <button class="toggle-btn active" id="music-toggle" onclick="toggleMusic()">♪ Music ON</button>
+          <button class="toggle-btn active" id="sfx-toggle"   onclick="toggleSFX()">⚔ SFX ON</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.settings-wrap -->
+</section>
+
+<!-- ════════════════════════════════════════
+     HISTORY
+════════════════════════════════════════ -->
+<section id="screen-hist" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-menu')">◂ Return</button>
+  <div class="section-header">
+    <h2>Battle Chronicle</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="hist-container">
+    <div class="hist-list" id="hist-list"></div>
+    <div style="margin-top:14px;text-align:center">
+      <button class="btn btn-red btn-sm" onclick="clearHistory()">✕ Erase Chronicle</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section id="screen-about" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-menu')">◂ Return</button>
+  <div class="section-header">
+    <h2>Sacred Lore &amp; Rules</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-box">
+    <h3>The Ancient Trial</h3>
+    <p>Long ago, when sages and demons battled for dominion over heaven and earth, the Great Sage Equaling Heaven devised the ultimate trial — a sacred three-by-three grid upon which fate itself would be decided. Victory demands strategy, while defeat demands blood and an inevitable fate of death! The heavens do not crown kings—they fear them. However, a thousand seals cannot bind a single will that refuses order. Strike without pattern. Think without chains. If they can predict you, you are already defeated. Forget not that victory is the moment the heavens stop correcting you!</p>
+
+    <h3>Sacred Rules of Combat</h3>
+    <div class="rule-item"><span class="rule-num">I.</span><span>Each warrior enters battle bearing 3 Soul Crystals — the embodiment of their lifeforce and divine resolve.</span></div>
+    <div class="rule-item"><span class="rule-num">II.</span><span>Claim three squares in a row — horizontal, vertical, or diagonal — upon the sacred grid to win the round and wound your foe.</span></div>
+    <div class="rule-item"><span class="rule-num">III.</span><span>The vanquished warrior loses one Soul Crystal per round defeat. When all three shatter, the match ends in execution.</span></div>
+    <div class="rule-item"><span class="rule-num">IV.</span><span>A Clash — when the grid fills with no victor — costs BOTH warriors one Soul Crystal. Mutual exhaustion is its own punishment.</span></div>
+    <div class="rule-item"><span class="rule-num">V.</span><span>Each warrior has 10 seconds to act each turn. Hesitation invites fate's hand to move for you — or forfeit the moment entirely.</span></div>
+    <div class="rule-item"><span class="rule-num">VI.</span><span>When a warrior's last Crystal shatters, the victor unleashes the Ultimate Strike. The defeated vanishes from the field.</span></div>
+
+    <h3>The Sacred Markers</h3>
+    <p>Player I claims territory with the <strong style="color:var(--gold)">Golden Circlet</strong> — the very crown that once bound and tormented the Great Sage, now a symbol of his mastery. Player II plants the <strong style="color:var(--jade-l)">Lotus Bloom</strong> — enlightenment rising from the mud and blood of battle.</p>
+
+    <h3>The Adversaries</h3>
+    <p><strong style="color:var(--gold)">Macaque</strong> strikes randomly, unpredictably, like a chaos demon with no strategy. <strong style="color:var(--gold)">Yaoguai King</strong> plays with cunning — blocking your paths, seizing obvious wins. <strong style="color:var(--gold)">Erlang Shen</strong>, the True Lord of the Heavens with his third eye, calculates every possible future using the ancient Minimax oracle. He cannot be beaten — only tied by equal destiny.</p>
+
+    <h3>Sacred Inspiration</h3>
+    <p>Born from devotion to <em>Black Myth: Wukong</em> — an epic action RPG retelling the mythological Journey to the West. All characters, lore, and aesthetics draw inspiration from the immortal legend of Sun Wukong, the Great Sage Equaling Heaven.</p>
+
+    <div class="divider" style="margin-top:20px"></div>
+    <p style="text-align:center;font-size:12px;letter-spacing:3px;color:rgba(184,168,138,.2);margin-bottom:0">A TRIBUTE TO THE LEGEND · NOT AN OFFICIAL PRODUCT</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     GAME SCREEN
+════════════════════════════════════════ -->
+<section id="screen-game" class="screen">
+
+  <!-- Header -->
+  <div class="game-header">
+    <button class="btn btn-sm btn-red" onclick="quitGame()" style="position:relative;top:auto;left:auto; font-size: 12px;">⬅ Retreat</button>
+    <div class="round-display">
+      <div class="round-label">Sacred Trial — Round</div>
+      <div class="round-number" id="round-num">1</div>
+    </div>
+    <div style="width:90px"></div>
+  </div>
+
+  <!-- Arena -->
+  <div id="arena">
+
+    <!-- Player 1 -->
+    <div class="player-panel" id="p1-panel">
+      <div class="turn-indicator"></div>
+      <div class="avatar-frame" id="p1-frame">
+        <span class="avatar-emoji" id="p1-emoji">🐒</span>
+      </div>
+      <div class="player-name"  id="p1-name">Sun Wukong</div>
+      <div class="player-title" id="p1-title">Great Sage</div>
+      <div class="crystals-row" id="p1-crystals">
+        <div class="crystal-gem" id="p1-c1">◆</div>
+        <div class="crystal-gem" id="p1-c2">◆</div>
+        <div class="crystal-gem" id="p1-c3">◆</div>
+      </div>
+      <div class="marker-label">◯ Ring</div>
+    </div>
+
+    <!-- Board center -->
+    <div id="board-center">
+      <div id="board">
+        <svg id="win-line" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+      </div>
+      <div class="timer-wrap">
+        <div id="timer-track"><div id="timer-fill"></div></div>
+        <div id="timer-count">10</div>
+      </div>
+      <div id="status-text">The trial begins...</div>
+    </div>
+
+    <!-- Player 2 -->
+    <div class="player-panel" id="p2-panel">
+      <div class="turn-indicator"></div>
+      <div class="avatar-frame" id="p2-frame">
+        <span class="avatar-emoji" id="p2-emoji">🐻</span>
+      </div>
+      <div class="player-name"  id="p2-name">Black Bear</div>
+      <div class="player-title" id="p2-title">Bear King</div>
+      <div class="crystals-row" id="p2-crystals">
+        <div class="crystal-gem" id="p2-c1">◆</div>
+        <div class="crystal-gem" id="p2-c2">◆</div>
+        <div class="crystal-gem" id="p2-c3">◆</div>
+      </div>
+      <div class="marker-label">✿ Lotus</div>
+    </div>
+
+  </div><!-- /#arena -->
+
+</section>
+
+<!-- ════════════════════════════════════════
+     VICTORY SCREEN
+════════════════════════════════════════ -->
+<div id="screen-victory">
+  <div class="vic-stars" id="vic-stars">🌟</div>
+  <div class="vic-title" id="vic-title">VICTORY</div>
+  <div class="divider" style="width:220px;margin:4px auto"></div>
+  <div class="vic-score">
+    <div class="score-block">
+      <div class="score-num" id="vic-p1hp">3</div>
+      <div class="score-lbl">P1 CRYSTALS</div>
+    </div>
+    <div class="score-sep">—</div>
+    <div class="score-block">
+      <div class="score-num" id="vic-p2hp">0</div>
+      <div class="score-lbl">P2 CRYSTALS</div>
+    </div>
+  </div>
+  <div class="vic-name"  id="vic-winner-name">SUN WUKONG TRIUMPHS</div>
+  <div class="vic-quote" id="vic-quote">"Even the heavens bow before the Great Sage."</div>
+  <div class="vic-buttons">
+    <button class="btn btn-lg" onclick="rematch()">⚔ Rematch</button>
+    <button class="btn"        onclick="toMode()">⚑ New Battle</button>
+    <button class="btn btn-sm" onclick="quitGame()">☯ Main Menu</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     ANIMATION ELEMENTS
+════════════════════════════════════════ -->
+<div id="projectile"></div>
+<div id="round-win-text"></div>
+<div id="clash-overlay"><div id="clash-text">⚔ CLASH ⚔</div></div>
+<div id="ultimate-overlay"><div id="ultimate-strike">💥</div></div>
+
+<script src="script.js"></script>
+</body>
+</html>
