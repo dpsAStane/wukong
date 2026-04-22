@@ -43,7 +43,7 @@ html, body {
   color: var(--paper);
   font-family: var(--font-ui);
   user-select: none;
-  cursor: url('assets/icons/yinyang.svg') 16 16, crosshair;
+  cursor: url('yinyang.svg') 16 16, crosshair;
 }
 button { font-family: inherit; border:none; background:none; cursor: inherit; }
 input  { font-family: inherit; }
