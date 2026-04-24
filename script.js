@@ -1102,3 +1102,7 @@ function $(id) { return document.getElementById(id); }
   // Save config on unload
   window.addEventListener('beforeunload', saveConfig);
 })();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js');
+}
