@@ -12,8 +12,12 @@ const AVATARS = {
   wukong:   { name:'Sun Wukong',       title:'Great Sage Equaling Heaven', emoji:'🐒', img:'wukong.jpg',  color:'#c9a227' },
   monk:     { name:'Wandering Monk',   title:'Pilgrim of Fate',            emoji:'⚔️', img:'monk.jpg',    color:'#a07820' },
   fox:      { name:'Fox Spirit',       title:'Enchantress of Illusions',   emoji:'🦊', img:'fox.jpg',     color:'#6a4a6a' },
+  blackbear:{ name:'Black Bear',       title:'Bear King of Black Wind',    emoji:'🐻', img:'bear.jpg',    color:'#5a5a8a' },
+  tiger:    { name:'Tiger Vanguard',   title:'Guardian of the West',       emoji:'🐯', img:'tiger.jpg',   color:'#8a5a5a' },
   bajie:    { name:'Zhu Bajie',        title:'Marshal of the Canopy',      emoji:'🌸', img:'bajie.jpg',   color:'#8b3a3a' },
   redboy:   { name:'Red Boy',          title:'Holy Infant King',           emoji:'🔥', img:'red.webp',    color:'#8b2a00' },
+  yaksha:   { name:'Yaksha King',      title:'Demon Strategist',           emoji:'👺', img:'yaksha.jpg',  color:'#4a6a4a' },
+  cheonma:  { name:'Cheonma',          title:'Heavenly Demon',             emoji:'🎖️', img:'cheonma.jpg', color:'#2a4a6a' },
   macaque:  { name:'Macaque',          title:'Ruler of the Mountain',      emoji:'🦍', img:'macaque.jpg', color:'#4a4a6a'},
   yaoguai:  { name:'Yaoguai King',     title:'Lord of the Demons',         emoji:'👹', img:'king.jpg',    color:'#6a4a4a' },
   erlang:   { name:'Erlang Shen',      title:'True Lord of the Heavens',   emoji:'🌟', img:'shen.jpg',    color:'#2d7a22' }
