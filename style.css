@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden;
+}
 /* ═══════════════════════════════════════════════════
    DESIGN TOKENS
 ═══════════════════════════════════════════════════ */
@@ -40,7 +43,7 @@ html, body {
   color: var(--paper);
   font-family: var(--font-ui);
   user-select: none;
-  cursor: url('assets/icons/yinyang.svg') 16 16, crosshair;
+  cursor: url('yinyang.svg') 16 16, crosshair;
 }
 button { font-family: inherit; border:none; background:none; cursor: inherit; }
 input  { font-family: inherit; }
@@ -81,6 +84,7 @@ input  { font-family: inherit; }
    SCREEN SYSTEM
 ═══════════════════════════════════════════════════ */
 .screen {
+  align-items: center;
   position: fixed; inset: 0;
   display: none; flex-direction: column;
   align-items: center; justify-content: center;
@@ -331,7 +335,11 @@ input  { font-family: inherit; }
 }
 
 .settings-wrap {
-  width: 100%; max-width: min(1100px, 95vw);
+  width: 100%;
+  max-width: min(1200px, 95vw);
+  margin: 0 auto;
+  margin-inline: auto;
+  padding: 0 clamp(10px, 3vw, 30px);
   display: flex; flex-direction: column; gap: clamp(10px, 1.5vh, 16px);
 }
 .settings-block {
@@ -351,7 +359,7 @@ input  { font-family: inherit; }
 /* Avatar grid */
 .av-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(clamp(100px, 14vw, 170px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: clamp(8px, 1.5vw, 18px);
 }
 .av-card {
@@ -395,7 +403,8 @@ input  { font-family: inherit; }
 /* Avatar images in picker */
 .av-card-em img {
   display: block;
-  width: clamp(80px, 12vw, 160px);
+  width: 100%;
+  aspect-ratio: 1 / 1;
   height: clamp(80px, 12vw, 155px);
   object-fit: cover;
   border: 1px solid rgba(201,162,39,.25);
@@ -979,7 +988,9 @@ input  { font-family: inherit; }
   .diff-icon  { width: clamp(80px, 40vw, 140px); height: clamp(80px, 40vw, 140px); }
 
   /* Settings */
-  .av-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .av-grid {grid-template-columns: repeat(2, 1fr); }
+  .av-card {padding: 10px 6px;}
+  .av-card-title {display: none;}
   .av-card-em img { width: 90px; height: 85px; }
   .theme-grid { grid-template-columns: 1fr; }
   .settings-wrap { max-width: 98vw; }
