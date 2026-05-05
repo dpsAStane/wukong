@@ -68,7 +68,7 @@
 ════════════════════════════════════════ -->
 <section id="screen-diff" class="screen">
   <button class="back-btn" onclick="showScreen('screen-mode')">◂ Return</button>
-  <div class="section-header">
+  <div class="section-header-AI">
     <h2>Choose Your Foe</h2>
     <div class="divider"></div>
     <p style="font-family:var(--font-body);color:var(--paper-d);font-size:15px;margin-top:8px">Who do you dare to challenge, great warrior?</p>
@@ -78,19 +78,19 @@
       <img class="diff-icon" src="macaque.jpg" alt="macaque">
       <div class="diff-name">Macaque</div>
       <div class="diff-level">Easy</div>
-      <p class="diff-desc">“Chaos is his only strategy. Victory is yours to take.”</p>
+      <p class="diff-desc">Chaos is his only strategy. Victory is yours to take.</p>
     </div>
     <div class="diff-card" onclick="startPvAI('medium')">
       <img class="diff-icon" src="king.jpg" alt="yaoguai">
       <div class="diff-name">Yaoguai King</div>
       <div class="diff-level">Medium</div>
-      <p class="diff-desc">“He attacks with cunning but falters under pressure.”</p>
+      <p class="diff-desc">He attacks with cunning but falters under pressure.</p>
     </div>
     <div class="diff-card" onclick="startPvAI('hard')">
       <img class="diff-icon" src="shen.jpg" alt="shen">
       <div class="diff-name">Erlang Shen</div>
       <div class="diff-level">Unbeatable</div>
-      <p class="diff-desc">“The True Lord sees every possible future. Can fate itself be defied?”</p>
+      <p class="diff-desc">The True Lord sees every possible future. Can fate itself be defied?</p>
     </div>
   </div>
 </section>
@@ -163,10 +163,10 @@
   </div>
   <div class="hist-container">
     <div class="hist-list" id="hist-list"></div>
-    <div style="margin-top:14px;text-align:center">
-      <button class="btn btn-red btn-sm" onclick="clearHistory()">✕ Erase Chronicle</button>
-    </div>
   </div>
+     <div style="margin-top:14px;text-align:center">
+      <button class="btn btn-red btn-sm" style="position: sticky;" onclick="clearHistory()">✕ Erase Chronicle</button>
+    </div>
 </section>
 
 <!-- ════════════════════════════════════════
@@ -205,20 +205,83 @@
 </section>
 
 <!-- ════════════════════════════════════════
+     CREDITS
+════════════════════════════════════════ -->
+<section id="screen-credits" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-menu')">◂ Return</button>
+  <div class="section-header">
+    <h2>The Artisans</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="credits-wrap">
+
+    <div class="credits-hero">
+      <div class="credits-hero-em"><img src="www/me.jpg" alt="dev"></div>
+      <div class="credits-hero-role">Game Designed &amp; Developed by</div>
+      <div class="credits-hero-name">Basilio Ramirez</div>
+      <div class="credits-hero-title">The Destined One</div>
+    </div>
+
+    <div class="credits-list-block">
+      <h3>⚒ Acknowledgements</h3>
+      <div class="credits-list">
+        <div class="credits-item">
+          <span class="credits-role">Inspired By</span>
+          <span class="credits-value">Black Myth: Wukong</span>
+          <span class="credits-sub">Game Science Studio · 2024</span>
+        </div>
+        <div class="credits-item">
+          <span class="credits-role">Based On</span>
+          <span class="credits-value">Journey to the West</span>
+          <span class="credits-sub">Wu Cheng'en · 16th Century</span>
+        </div>
+        <div class="credits-item">
+          <span class="credits-role">Typography</span>
+          <span class="credits-value">Cinzel Decorative &amp; IM Fell English</span>
+          <span class="credits-sub">Google Fonts · Open Source</span>
+        </div>
+        <div class="credits-item">
+          <span class="credits-role">Audio Engine</span>
+          <span class="credits-value">Web Audio API</span>
+          <span class="credits-sub">Procedurally Generated · No Audio Files</span>
+        </div>
+        <div class="credits-item">
+          <span class="credits-role">AI Opponent</span>
+          <span class="credits-value">Minimax Algorithm</span>
+          <span class="credits-sub">With Alpha-Beta Pruning</span>
+        </div>
+        <div class="credits-item">
+          <span class="credits-role">Built With</span>
+          <span class="credits-value">HTML · CSS · Vanilla JavaScript</span>
+          <span class="credits-sub">No frameworks. No engines. Pure craft.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="credits-footer-block">
+      <p class="credits-footer">"Even the heavens bow before those who dare to create."</p>
+      <p class="credits-legal">A tribute to the legend · Not an official product · All rights to their respective owners</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
      GAME SCREEN
 ════════════════════════════════════════ -->
 <section id="screen-game" class="screen">
 
   <!-- Header -->
   <div class="game-header">
-    <button class="btn btn-sm btn-red" onclick="quitGame()" style="position:relative;top:20px;left:20px; font-size: 12px;">⬅ Retreat</button>
-    <div class="round-display">
-      <div class="round-label">Sacred Trial — Round</div>
-      <div class="round-number" id="round-num">1</div>
-    </div>
-    <div style="width:90px"></div>
+      <button class="btn btn-sm btn-red retreat-btn" onclick="quitGame()">⬅ Retreat</button>
+      <div class="round-display">
+        <div class="round-label" style="font-size: 20px; ">Sacred Trial — Round</div>
+        <div class="round-number" id="round-num" style="font-size: 28px; ">1</div>
+      </div>
+      <div class="header-spacer"></div>
   </div>
-
   <!-- Arena -->
   <div id="arena">
 
