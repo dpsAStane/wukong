@@ -305,6 +305,7 @@ input  { font-family: inherit; }
   margin: auto; margin-bottom: 8px;
   width: clamp(80px, 14vw, 160px);
   height: clamp(80px, 14vw, 160px);
+  border-raidus: 3px;
 }
 .diff-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
 .diff-name  { font-size: clamp(12px, 2vw, 16px); color: var(--gold); letter-spacing: 2px; margin-bottom: 4px; }
