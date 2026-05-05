@@ -886,7 +886,7 @@ input  { font-family: inherit; }
 
 /* Player info */
 .player-name  { font-size: clamp(7px, 1.1vw, 13px); letter-spacing: 2px; color: var(--paper-d); text-transform: uppercase; text-align: center; }
-.player-title { font-family: var(--font-body); font-size: clamp(7px, 1.1vw, 13px); color: var(--gold-d); font-style: italic; text-align: center; margin-top: -2px; }
+.player-title { font-family: var(--font-body); font-size: clamp(7px, 1.1vw, 13px); color: var(--gold-d); font-style: italic; letter-spacing: 0.5px; text-align: center; margin-top: -2px; }
 
 /* Soul Crystals */
 .crystals-row { display: flex; gap: clamp(3px, 0.6vw, 5px); justify-content: center; }
